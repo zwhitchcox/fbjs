@@ -9,8 +9,7 @@
 
 'use strict';
 
-module.exports = function(babel) {
-  var t = babel.types;
+module.exports = function({types: t, Transformer}) {
 
   var DEV_EXPRESSION = t.binaryExpression(
     '!==',
@@ -26,7 +25,7 @@ module.exports = function(babel) {
     t.literal('production')
   );
 
-  return new babel.Transformer('fbjs.dev-expression', {
+  return new Transformer('fbjs.dev-expression', {
     Identifier: {
       enter: function(node, parent) {
         // Do nothing when testing
